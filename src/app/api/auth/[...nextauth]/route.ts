@@ -1,8 +1,9 @@
-import SQL from '@/lib/sql';
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import SQL from '@/lib/sql';
 
-export const options: NextAuthOptions = {
+const options: NextAuthOptions = {
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
@@ -17,13 +18,10 @@ export const options: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (credentials) {
-          const {
-            results,
-          }: {
-            results: any[];
-          } = await SQL.query('SELECT * FROM `users` WHERE email = ?', [
-            credentials.email,
-          ]);
+          const { results }: { results: any[] } = await SQL.query(
+            'SELECT * FROM `users` WHERE email = ?',
+            [credentials.email]
+          );
 
           if (results.length > 0) {
             const user = results[0];

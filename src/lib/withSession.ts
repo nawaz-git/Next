@@ -1,4 +1,4 @@
-import { options } from '@/app/api/auth/[...nextauth]/route';
+import { OPTIONS } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -9,7 +9,7 @@ export type Handler = (
 
 export function withSession(handler: Handler): Handler {
   return async (req: NextApiRequest, res: NextApiResponse) => {
-    const session = await getServerSession(req, res, options);
+    const session = await getServerSession(req, res, OPTIONS);
     if (!session) {
       res.status(401).json({ message: 'You must be Logged In!' });
       return;
