@@ -38,7 +38,7 @@ const Sidebar = () => {
   return (
     <div className='min-h-screen flex flex-col shadow-md min-w-[220px]'>
       <div className='py-4 border-b-2'>
-        <h1 className='px-4 text-lg font-semibold'>Finopsly</h1>
+        <h1 className='px-4 text-lg font-semibold'>finOpsly</h1>
       </div>
       <div className='flex-grow flex flex-col gap-3 py-4 px-3'>
         {items.map((item, index) => (
