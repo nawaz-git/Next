@@ -9,11 +9,5 @@ export default async function LoginPage() {
     redirect('/');
   }
 
-  return (
-    <section className='bg-black h-screen flex items-center justify-center'>
-      <div className='w-[600px]'>
-        <LoginForm />;
-      </div>
-    </section>
-  );
+  return <LoginForm />;
 }

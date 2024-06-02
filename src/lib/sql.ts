@@ -13,26 +13,40 @@ class sql {
   }
 
   private async connect() {
-    this.connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      database: 'test',
-      password: '',
-    });
+    try {
+      this.connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'test',
+        password: '',
+      });
+      console.log('Database connected successfully');
+    } catch (error) {
+      console.error('Error connecting to the database:', error);
+    }
   }
 
   public async query(query: string, values?: any[]): Promise<QueryResult> {
-    if (!this.connection) {
-      await this.connect();
+    try {
+      if (!this.connection) {
+        await this.connect();
+      }
+      const [results, fields] = await this.connection!.execute(query, values);
+      return { results: results as RowDataPacket[], fields };
+    } catch (error) {
+      console.error('Error executing query:', error);
+      throw error;
     }
-
-    const [results, fields] = await this.connection!.execute(query, values);
-    return { results: results as RowDataPacket[], fields };
   }
 
   public async close() {
-    if (this.connection) {
-      await this.connection.end();
+    try {
+      if (this.connection) {
+        await this.connection.end();
+        console.log('Database connection closed');
+      }
+    } catch (error) {
+      console.error('Error closing the database connection:', error);
     }
   }
 }

@@ -53,56 +53,76 @@ export default function LoginForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className='bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-64 mx-auto'
-    >
-      {error && <p className='text-red-500 mb-4'>{error}</p>}
-      <div className='mb-4'>
-        <label
-          className='block text-gray-700 text-sm font-bold mb-2'
-          htmlFor='email'
-        >
-          Email
-        </label>
-        <input
-          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          id='email'
-          type='text'
-          placeholder='Enter your email'
-          {...register('email')}
-        />
-        {errors.email && (
-          <p className='text-red-500 text-xs italic'>{errors.email.message}</p>
-        )}
+    <div className='min-h-screen bg-white flex'>
+      <div className='flex flex-1 bg-[#09090b] justify-center items-start h-screen w-full flex-col'>
+        <div className='px-48 flex flex-col gap-2'>
+          <h1 className='text-5xl text-[#fafafa] font-bold'>finOpsly.</h1>
+          <span className='text-2xl text-[#a29faa]'>
+            Uncover Hidden Costs, Enhance Profitability
+          </span>
+        </div>
       </div>
-      <div className='mb-6'>
-        <label
-          className='block text-gray-700 text-sm font-bold mb-2'
-          htmlFor='password'
-        >
-          Password
-        </label>
-        <input
-          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          id='password'
-          type='password'
-          placeholder='Enter your password'
-          {...register('password')}
-        />
-        {errors.password && (
-          <p className='text-red-500 text-xs italic'>
-            {errors.password.message}
-          </p>
-        )}
+      <div className='flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24'>
+        <div className='mx-auto w-full max-w-sm lg:w-96'>
+          <div>
+            <h2 className='mt-6 text-3xl font-extrabold text-gray-900'>
+              Log In
+            </h2>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)} className='mt-8 space-y-6'>
+            {error && <p className='text-red-500 mb-4'>{error}</p>}
+            <div>
+              <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='email'
+              >
+                Email
+              </label>
+              <input
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                id='email'
+                type='text'
+                placeholder='Enter your email'
+                {...register('email')}
+              />
+              {errors.email && (
+                <p className='text-red-500 text-xs italic'>
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+            <div className='mt-4'>
+              <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='password'
+              >
+                Password
+              </label>
+              <input
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                id='password'
+                type='password'
+                placeholder='Enter your password'
+                {...register('password')}
+              />
+              {errors.password && (
+                <p className='text-red-500 text-xs italic'>
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+            <div className='mt-4'>
+              <button
+                type='submit'
+                className='w-full bg-[#09090b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Logging you In....' : 'Log In'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <button
-        type='submit'
-        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Logging you In....' : 'Login'}
-      </button>
-    </form>
+    </div>
   );
 }
