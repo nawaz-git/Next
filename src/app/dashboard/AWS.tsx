@@ -2,9 +2,9 @@
 
 import Column from '@/components/Charts/Column';
 import React, { useEffect, useState } from 'react';
-import Chart from 'react-apexcharts';
 
 const AWS = () => {
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {

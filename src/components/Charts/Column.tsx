@@ -22,6 +22,7 @@ interface ChartData {
       bar: {
         borderRadius: number;
         horizontal: boolean;
+        distributed: boolean;
       };
     };
     dataLabels: {
@@ -29,6 +30,9 @@ interface ChartData {
     };
     xaxis: {
       categories: string[];
+    };
+    fill: {
+      colors: string[];
     };
   };
 }
@@ -50,6 +54,7 @@ const ColumnChart: React.FC<ColumnChartProps> = ({ data, labels }) => {
         bar: {
           borderRadius: 4,
           horizontal: false,
+          distributed: true,
         },
       },
       dataLabels: {
@@ -57,6 +62,20 @@ const ColumnChart: React.FC<ColumnChartProps> = ({ data, labels }) => {
       },
       xaxis: {
         categories: labels,
+      },
+      fill: {
+        colors: [
+          '#008FFB',
+          '#00E396',
+          '#FEB019',
+          '#FF4560',
+          '#775DD0',
+          '#546E7A',
+          '#26a69a',
+          '#D10CE8',
+          '#FF7F50',
+          '#FFD700',
+        ],
       },
     },
   });
@@ -78,22 +97,22 @@ const ColumnChart: React.FC<ColumnChartProps> = ({ data, labels }) => {
     });
   }, [data, labels]);
 
-return (
+  return (
     <div className='column-chart'>
-        <Chart
-            options={{
-                ...chartData.options,
-                chart: {
-                    type: 'bar' as const,
-                    height: 350,
-                },
-            }}
-            series={chartData.series}
-            type='bar'
-            height={350}
-        />
+      <Chart
+        options={{
+          ...chartData.options,
+          chart: {
+            type: 'bar',
+            height: 350,
+          },
+        }}
+        series={chartData.series}
+        type='bar'
+        height={350}
+      />
     </div>
-);
+  );
 };
 
 export default ColumnChart;
